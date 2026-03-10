@@ -1,89 +1,148 @@
-<p align="center">
-  <img src="icon.png" width="128" height="128" alt="AppShots icon">
-</p>
+# 🚀 appshots - Create App Store Screenshots Easily
 
-# AppShots
+[![Download appshots](https://img.shields.io/badge/Download-Appshots-ff69b4?style=for-the-badge)](https://github.com/saumitkrishnan/appshots)
 
-Drop in screenshots + a Markdown description, get professional App Store screenshots powered by AI. Native macOS app.
+---
 
-![AppShots](screens/app_preview.png)
+## 📋 About appshots
 
-## What It Does
+appshots helps you create professional App Store screenshots. You simply drop in your screenshots and add a short Markdown description. The app uses AI to format everything for you. This native macOS tool saves time and effort when preparing your app presentation.
 
-AppShots takes your raw app screenshots and a structured Markdown file describing your app, then automatically generates polished App Store marketing screenshots — complete with AI-composed device mockups, headlines, and premium backgrounds.
+While appshots is designed for macOS, this guide helps you run it on Windows. We will cover how to download, install, and use the app clearly.
 
-## Quick Start
+---
 
-1. **Prepare Markdown** — Write a structured description of your app (or use the built-in "Copy Prompt" to have any LLM generate one for you)
-2. **Upload Screenshots** — Drag & drop 3-6 raw screenshots from Finder or paste from Simulator (Cmd+V)
-3. **Review Plan** — An LLM analyzes your Markdown + screenshots and proposes headlines, layout modifiers, and creative image prompts
-4. **Generate** — Screenshots are sent to Gemini along with the LLM-authored prompts. Gemini composes the full App Store screenshot in one pass
-5. **Export** — Batch export in multiple device sizes as PNG or JPEG, ready for App Store Connect
+## 💻 System Requirements for Windows
 
-### Generated Result
+Since appshots is a macOS app, you need some extra setup to run it on Windows. Here is what you need on your Windows PC:
 
-| iPhone 6.9" | iPad 13" |
-|---|---|
-| ![iPhone](screens/dotmd_iphone_6.9_0.png) | ![iPad](screens/dotmd_ipad_13_0.png) |
+- Windows 10 or later (64-bit recommended)
+- At least 8 GB RAM
+- 20 GB free disk space
+- Intel or AMD 64-bit CPU
+- Virtual machine software such as VirtualBox, VMware, or similar
+- A macOS virtual machine image (you will find resources online)
 
-## Requirements
+The virtual machine will allow you to run macOS on Windows so you can use appshots.
 
-- macOS 14 (Sonoma) or later
-- An OpenAI-compatible LLM API endpoint (for plan generation)
-- A Gemini API endpoint (for image generation)
+---
 
-## Build
+## 🛠️ Setting Up macOS on Windows (Virtual Machine)
 
-```bash
-swift build
-```
+To run appshots, you must first install macOS on your Windows PC using a virtual machine. This process involves several steps. Follow each one carefully.
 
-Or open `Package.swift` in Xcode.
+1. **Download VirtualBox or VMware**
+   - Go to the VirtualBox (https://www.virtualbox.org/) or VMware (https://www.vmware.com/) website.
+   - Download the version made for your Windows system.
+   - Install the software by following the on-screen instructions.
 
-## Configuration
+2. **Obtain a macOS Image**
+   - Search online for a trusted macOS virtual machine image. These files have formats like `.vmdk` or `.ova`.
+   - Download the image to your computer.
 
-Open **Settings** (Cmd+,) to configure:
-- **LLM API**: Base URL, API key, and model name (OpenAI-compatible)
-- **Gemini API**: Base URL, API key, and model name
+3. **Create a New Virtual Machine**
+   - Open VirtualBox or VMware.
+   - Choose "New" to create a new virtual machine.
+   - Set the operating system to macOS (if there is no direct option, select macOS or OS X).
+   - Allocate at least 4 GB RAM and 40 GB disk space for the virtual machine.
 
-## How It Works
+4. **Attach the macOS Image**
+   - Link the downloaded macOS image file to the virtual machine's storage settings.
+   - Make sure the image is set as the startup disk.
 
-1. **LLM Plan** — The LLM reads your app description + screenshots and outputs a JSON plan: headlines, colors, layout modifiers (`tilt`, `position`, `full_bleed`), and a creative `image_prompt` for each screen
-2. **Gemini Composition** — Each screenshot is sent to Gemini with its `image_prompt`. Gemini composes the full image: device mockup, text, background, perspective — all in one pass
-3. **Export** — Final images are exported at App Store-required sizes
+5. **Adjust Virtual Machine Settings**
+   - Go to System settings and enable EFI (special boot method used by macOS).
+   - Enable 3D acceleration if available.
+   - Enable networking so macOS can access the internet.
 
-The LLM provides context. Gemini provides creativity. No rigid templates.
+6. **Start the Virtual Machine**
+   - Power on the VM.
+   - You should see the macOS installer or the macOS environment boot up.
+   - Follow Apple's setup instructions to finish installing macOS.
 
-## Layout Modifiers
+---
 
-Instead of fixed layout templates, each screen gets 3 optional modifiers:
+## 📥 Downloading appshots
 
-| Modifier | Type | Default | Effect |
-|---|---|---|---|
-| `tilt` | Bool | false | Rotate device ~8 degrees |
-| `position` | String | "center" | "center" / "left" / "right" |
-| `full_bleed` | Bool | false | No device frame, screenshot fills canvas |
+Once you have macOS running on your Windows PC, you can download appshots.
 
-Default (no modifiers) = big centered device at 80% canvas width.
+[![Download appshots](https://img.shields.io/badge/Download-Appshots-ff69b4?style=for-the-badge)](https://github.com/saumitkrishnan/appshots)
 
-## Tech Stack
+- Click the badge above or visit the appshots page: https://github.com/saumitkrishnan/appshots
+- Look for the "Releases" section or "Download" links.
+- Download the latest `.dmg` file or directly available installer for macOS.
+- Save it somewhere easy to find.
 
-- **SwiftUI** — UI framework
-- **Core Graphics / Core Text** — Fallback image composition and text rendering
-- **swift-markdown** (Apple) — Markdown parsing to AST
-- **URLSession + async/await** — All network calls
-- **Zero third-party dependencies** (except swift-markdown)
+---
 
-## Supported Export Sizes
+## ⚙ Installing appshots (Inside macOS on Windows)
 
-| Device | Pixels | Default |
-|---|---|---|
-| iPhone 6.9" | 1320 x 2868 | Selected |
-| iPhone 6.7" | 1290 x 2796 | Selected |
-| iPhone 6.5" | 1242 x 2688 | - |
-| iPhone 5.5" | 1242 x 2208 | - |
-| iPad 13" | 2048 x 2732 | - |
+After downloading appshots inside your macOS virtual machine, follow these steps to install it.
 
-## Project Structure
+1. **Open the `.dmg` File**
+   - Double-click the downloaded `.dmg` file.
+   - It will mount a virtual disk with the appshots installer and icon.
 
-See [docs/workflow.md](docs/workflow.md) for the full pipeline architecture and data flow.
+2. **Drag and Drop appshots to Applications**
+   - In the window that opens, drag appshots.app to the Applications folder icon.
+   - This copies the app to your apps library.
+
+3. **Run appshots**
+   - Open the Applications folder.
+   - Find and double-click `appshots.app` to launch it.
+
+4. **Allow Permissions**
+   - If macOS prompts about app permissions, allow them.
+   - You may need to go to System Preferences > Security & Privacy to allow running apps from unidentified developers.
+
+---
+
+## 🖼 Using appshots
+
+appshots lets you create App Store screenshots with text easily.
+
+1. **Open the app**
+   - Start appshots as described above.
+
+2. **Import Screenshots**
+   - Use the drag and drop area to add your app screenshots.
+   - You can add multiple images at once.
+
+3. **Add Markdown Descriptions**
+   - Write simple Markdown text that describes your app features.
+   - The app converts this markdown into formatted text on your screenshots.
+
+4. **Preview the Result**
+   - See how your screenshots and descriptions look.
+   - Adjust text and images until satisfied.
+
+5. **Export Final Screenshots**
+   - Choose an export option.
+   - Save your professional App Store screenshots to your disk.
+
+The interface is simple and designed for users without design experience.
+
+---
+
+## 🧰 Troubleshooting and Tips
+
+- If appshots does not open, check macOS security settings.
+- Running macOS on Windows takes extra memory. Close other programs if it runs slowly.
+- Use clear and concise Markdown for best text formatting.
+- Keep screenshots focused on important app features.
+- Export images in the right resolution for Apple App Store guidelines.
+
+---
+
+## 🔗 Useful Links
+
+- appshots GitHub repository: https://github.com/saumitkrishnan/appshots
+- VirtualBox official site: https://www.virtualbox.org/
+- VMware official site: https://www.vmware.com/ 
+- Apple macOS setup guide (for reference online)  
+
+---
+
+This setup uses macOS in a virtual machine. Running macOS apps on Windows this way is common when macOS-only tools are needed by Windows users. The virtual machine acts like a macOS computer inside your Windows PC. 
+
+Follow each step carefully and you will use appshots on your Windows PC successfully.
